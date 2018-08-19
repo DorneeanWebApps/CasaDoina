@@ -5,10 +5,51 @@ class MyOffersCarousel extends LitElement {
     _render(props, pickerselected) {
         return html `       
     <style>
-        .section-wrapper{
+        #section-wrapper{
             display: grid;
-            grid-template-columns: 10vw 3fr 2fr 10vw;
+            grid-gap: 5vw;
+            grid-template-columns: 3fr 2fr ;
             align-content: center;
+            overflow:hidden;
+            transform: translateX(-100%);
+            -webkit-transform: translateX(-100%);
+        }
+
+        #offer-container{
+            height:500px;
+            color: var(--app-darker-text-color);
+            font-family: 'Merriweather', serif;        }
+
+        #offer-container > h1{
+            margin: 0;
+        }
+
+        #offer-container > h2{
+            margin: 0;
+        }
+
+        #offer-container > h3{
+            margin: 0;
+        }
+
+        #offer-container > h6{
+            margin: 0;
+        }
+
+        #offer-container > p{
+
+        }
+
+        .slide-in {
+            animation: slide-in 1.5s forwards;
+            animation-timing-function: ease-in;
+            -webkit-animation: slide-in 0.5s forwards;
+        }
+
+        .slide-out {
+            animation: slide-out 1.5s forwards;
+            animation-timing-function: ease-out;
+            -webkit-animation: slide-out 0.5s forwards;
         }
 
         .arrow{
@@ -23,9 +64,36 @@ class MyOffersCarousel extends LitElement {
             height: 100%;
         }
 
+        .image-wrapper{
+            height: 100%;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
         .image-container{
             width: 100%;
             height: auto;
+            margin: auto;
+            border-radius: 7px;
+        }
+
+        @keyframes slide-in {
+            100% { transform: translateX(0%); }
+        }
+
+        @-webkit-keyframes slide-in {
+            100% { -webkit-transform: translateX(0%); }
+        }
+            
+        @keyframes slide-out {
+            0% { transform: translateX(0%); }
+            100% { transform: translateX(100%); }
+        }
+
+        @-webkit-keyframes slide-out {
+            0% { -webkit-transform: translateX(0%); }
+            100% { -webkit-transform: translateX(100%); }
         }
 
 
@@ -34,32 +102,19 @@ class MyOffersCarousel extends LitElement {
     </style>
 
 
-        <div class="section-wrapper">
-            <div class="arrow">
-              <svg class="icon">${chevronLeft}</svg>  
-            </div>
-            <div class="offer-container">
-                <h1>Nostrud nulla sint excepteur officia magna sit sint sunt pariatur laboris nisi exercitation enim.</h1>
-                <h2>PERIOADA OFERTA</h2>
-                <p>In sit sit enim commodo adipisicing et in consequat cupidatat eu velit ullamco. Aute dolore pariatur nulla reprehenderit amet nulla voluptate do proident reprehenderit elit officia dolore esse. Commodo minim ad reprehenderit ex laborum consequat commodo duis proident. Et amet ullamco deserunt velit voluptate reprehenderit ut reprehenderit veniam pariatur adipisicing. Commodo voluptate aliquip in exercitation voluptate culpa nulla cillum ea. Consequat Lorem reprehenderit voluptate cupidatat officia. Ipsum non anim velit anim et do amet pariatur excepteur.
+        <div id="section-wrapper">
+        
 
-Commodo sunt labore labore amet esse. Duis nisi tempor non qui nostrud deserunt nisi officia exercitation occaecat. Exercitation elit officia est ex qui do consequat proident sunt laboris. Dolor eu reprehenderit laboris et dolore labore nulla aliquip.
-
-Eiusmod nostrud elit consequat nisi in incididunt irure nostrud fugiat. Minim do in ullamco deserunt consectetur. Ea duis culpa magna incididunt ad ea Lorem eu laborum ullamco tempor veniam.
-
-Do eiusmod esse mollit tempor amet irure et qui ullamco. Sint aute proident magna cupidatat aliqua. Non ad tempor mollit tempor commodo aute esse. Sit dolor laborum sit labore consequat dolor officia est veniam eiusmod. Sint et esse cillum sint in ipsum sit in.
-
-Ad adipisicing id ea amet anim eiusmod magna eu laborum do dolor. Cupidatat eiusmod laboris labore labore. Elit consectetur et mollit amet mollit.</p>
-                <h3>PRETURI OFERTA</h3>
-                <h6>CONDITII OFERTA</h6>
-
+            <div id="offer-container">
+                <h1>${props.offers[this.index].denumire}</h1>
+                <h2>${props.offers[this.index].perioada}</h2>
+                <p>${props.offers[this.index].descriere}</p>
+                <h3>${props.offers[this.index].preturi}</h3>
+                <h6>${props.offers[this.index].conditii}</h6>
             </div>
 
-            <div class="text container">
-                <img class="image-container" src="/images/mainpic.jpg">
-            </div>
-            <div class="arrow">
-            <svg class="icon">${chevronRight}</svg>  
+            <div class="image-wrapper">
+                <img class="image-container" src="${props.offers[this.index].mainimage}">
             </div>
 
         </div>
@@ -68,21 +123,59 @@ Ad adipisicing id ea amet anim eiusmod magna eu laborum do dolor. Cupidatat eius
     }
 
 
+
     static get properties() {
         return {
-            sectionTitle: String,
+            offers: Array,
+            offer: Object,
+            index: Number
         }
     }
 
     constructor() {
         super();
+        this.offer = {}
+        this.index = 0;
     }
 
     _firstRendered(props) {}
 
-    _didRender(props, changedProps, prevProps) {}
+    _didRender(props, changedProps, prevProps) {
+        this.slideOffer();
+
+    }
+ 
+    slideIn(){
+
+        this.shadowRoot.querySelector('#section-wrapper').classList.add('slide-in');
+        this.shadowRoot.querySelector('#section-wrapper').classList.remove('slide-out');
+
+    }
+
+
+    slideOut(){
+            setTimeout(() => {
+                this.shadowRoot.querySelector('#section-wrapper').classList.remove('slide-in');
+                this.shadowRoot.querySelector('#section-wrapper').classList.add('slide-out');
+            }, 5500);
+    }
+
+    changeOffersIndex(){
+            setTimeout(()=>{
+                this.index === this.offers.length-1 ? this.index=0 : this.index = this.index+1;
+            },6000)
+    }
+
+    slideOffer(){
+        if(this.index < this.offers.length){
+            this.slideIn();
+            this.changeOffersIndex();
+            this.slideOut();
+        }
+    }
 
 
 }
+
 
 window.customElements.define('my-offers-carousel', MyOffersCarousel);

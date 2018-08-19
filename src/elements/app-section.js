@@ -14,14 +14,15 @@ class AppSection extends LitElement {
             border: 2px;
             border-style: solid;
             border-color: var(--app-dark-text-color);
-            padding: 30px 0;
+            padding: 30px 30px;
+            overflow: hidden;
         }
 
         .section-title{
             border: 2px;
             border-style: solid;
             border-color: var(--app-dark-text-color);
-            color: var(--app-dark-text-color);
+            color: var(--app-darker-text-color);
             position: absolute;
             padding: 8px 24px;
             top: -0.5em;

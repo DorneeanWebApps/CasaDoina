@@ -11,6 +11,8 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
 import { html } from '@polymer/lit-element';
 import { PageViewElement } from './page-view-element.js';
 
+import { myOffers } from '../initializers/my-offers';
+
 import '../elements/app-section.js';
 import '../elements/my-offers-carousel';
 import '../elements/my-pictures-carousel';
@@ -24,7 +26,7 @@ class MyHome extends PageViewElement {
       </style>
 
       <app-section sectionTitle="Bucura-te de ofertele noastre">
-        <my-offers-carousel offers="${props.myOffers}"></my-offers-carousel>
+        <my-offers-carousel offers="${myOffers}"></my-offers-carousel>
       </app-section>
 
       <app-section sectionTitle="Casa Doina - gazdele tale ideale">
@@ -47,9 +49,11 @@ class MyHome extends PageViewElement {
     `;
   }
 
-  static get properties() { return {
-    myOffers: Object
-  }}
+  static get properties() {
+     return {
+
+     } 
+  }
 
 
   // This is called every time something is updated in the store.
