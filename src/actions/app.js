@@ -34,10 +34,10 @@ const loadPage = (page) => (dispatch) => {
         // navigating to view1 after my-view1.js is loaded.
       });
       break;
-    case 'cazare':
+    case 'camere':
       import('../components/my-view2.js');
       break;
-    case 'despre':
+    case 'oferte':
       import('../components/my-view3.js');
       break;
     case 'vatra_dornei':

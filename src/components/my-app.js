@@ -213,9 +213,9 @@ class MyApp extends connect(store)(LitElement) {
       <!-- This gets hidden on a small screen-->
       <nav class="toolbar-list">
         <a selected?="${_page === 'acasa'}" href="/acasa">Acasa</a>
-        <a selected?="${_page === 'cazare'}" href="/cazare">Cazare</a>
-        <a selected?="${_page === 'despre'}" href="/despre">Despre noi</a>
         <a selected?="${_page === 'vatra_dornei'}" href="/vatra_dornei">Vatra Dornei</a>
+        <a selected?="${_page === 'oferte'}" href="/oferte">Oferte</a>
+        <a selected?="${_page === 'camere'}" href="/camere">Camere</a>
         <a selected?="${_page === 'contact'}" href="/contact">Contact</a>
       </nav>
       </app-toolbar>
@@ -226,9 +226,9 @@ class MyApp extends connect(store)(LitElement) {
         on-opened-changed="${e => store.dispatch(updateDrawerState(e.target.opened))}">
       <nav class="drawer-list">
         <a selected?="${_page === 'acasa'}" href="/acasa">Acasa</a>
-        <a selected?="${_page === 'cazare'}" href="/cazare">Cazare</a>
-        <a selected?="${_page === 'despre'}" href="/despre">Despre noi</a>
         <a selected?="${_page === 'vatra_dornei'}" href="/vatra_dornei">Vatra Dornei</a>
+        <a selected?="${_page === 'oferte'}" href="/oferte">Oferte</a>
+        <a selected?="${_page === 'camere'}" href="/camere">Camere</a>
         <a selected?="${_page === 'contact'}" href="/contact">Contact</a>
       </nav>
     </app-drawer>
@@ -236,8 +236,8 @@ class MyApp extends connect(store)(LitElement) {
     <!-- Main content -->
     <main role="main" class="main-content">
       <my-home class="page" active?="${_page === 'acasa'}"></my-home>
-      <my-view2 class="page" active?="${_page === 'cazare'}"></my-view2>
-      <my-view3 class="page" active?="${_page === 'despre'}"></my-view3>
+      <my-view2 class="page" active?="${_page === 'camere'}"></my-view2>
+      <my-view3 class="page" active?="${_page === 'oferte'}"></my-view3>
       <my-view1 class="page" active?="${_page === 'vatra_dornei'}"></my-view1>
       <my-view3 class="page" active?="${_page === 'contact'}"></my-view3>
       <my-view404 class="page" active?="${_page === 'view404'}"></my-view404>

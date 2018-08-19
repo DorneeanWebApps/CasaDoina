@@ -14,7 +14,7 @@ class AppSection extends LitElement {
             border: 2px;
             border-style: solid;
             border-color: var(--app-dark-text-color);
-            height: 250px;
+            padding: 30px 0;
         }
 
         .section-title{
@@ -32,16 +32,17 @@ class AppSection extends LitElement {
         .section-title > h2{
             margin: 0;
             padding: 0;
+            font-family: 'Acme', sans-serif;
         }
+
     </style>
 
     <div class="section-wrapper">
         <div class="section-container">
-
-        </div>
-
-        <div class="section-title">
-            <h2>TITLU SECTIUNE</h2>
+            <div class="section-title">
+                <h2>${props.sectionTitle}</h2>
+            </div>
+            <slot></slot>
         </div>
     </div>
 
@@ -54,7 +55,7 @@ class AppSection extends LitElement {
 
     static get properties() {
         return {
-
+            sectionTitle: String,
         }
     }
 
